@@ -1,0 +1,56 @@
+<p>
+At your work there is a place for the lunch where are 5 microwave ovens (М1, М2, М3, М4, М5). Every microwave could be controlled by remote control with the next commands:<br>
+<br>
+<strong>set_time</strong>("xx:xx"), where "xx:xx" - time in the minutes and seconds, which shows, how long the eat will be warm up. For example: set_time("05:30")<br>
+<strong>add_time</strong>("+Ns"), <strong>add_time</strong>("+Nm"), where N - the amount of the seconds("s") or minutes("m"), which should be added to the current time.<br>
+<strong>del_time</strong>("-Ns"), <strong>del_time</strong>("-Nm"), where N - the amount of the seconds("s") or minutes("m"), which should be subtracted from the current time.<br>
+<strong>show_time()</strong>, shows current time for the microwave.<br>
+<br>
+The default time is 00:00. The time is couldn't be less than 00:00 or greater than 90:00, even if add_time or del_time make this happens.
+<br>
+<br>
+Your task is to create 5 classes - one for the each microwave remote control: RemoteControlM1, RemoteControlM2, RemoteControlM3, RemoteControlM4, RemoteControlM5.
+Only fifth oven is works properly and shows the full time. The other four have some problems with their displays. They are show time like this:<br>
+RemoteControlM1.show_time() == "_0:00"<br>
+RemoteControlM2.show_time() == "0_:00"<br>
+RemoteControlM3.show_time() == "00:_0"<br>
+RemoteControlM4.show_time() == "00:0_"<br>
+RemoteControlM5.show_time() == "00:00"<br>
+So the 1st microwave doesn't show the 1st time symbol, the 2nd - 2nd symbol and so on.
+<br>
+In this mission you could use <a href='https://en.wikipedia.org/wiki/Bridge_pattern'>Bridge</a> design pattern. Its main task is -  to decouple an abstraction from its implementation so that the two can vary independently.
+</p>
+
+<p>
+<strong>Example</strong>:
+<pre class="brush: python">
+remote_control_1 = RemoteControlM1()
+remote_control_1.set_time("01:00")
+    
+remote_control_2 = RemoteControlM5()
+remote_control_2.del_time("-300s")
+remote_control_2.add_time("+100s")
+    
+remote_control_1.show_time() == "_1:00"
+remote_control_2.show_time() == "01:40"
+</pre>
+</p>
+<br>
+
+<p>
+    <strong>Input: </strong>methods of the 5 RemoteControl classes.
+</p>
+
+<p>
+    <strong>Output: </strong>time on the display of the microwave.
+</p>
+
+<p class="for_info_only">
+    <strong>How it is used: </strong>
+    For work with time.
+</p>
+
+<p>
+    <strong>Precondition:</strong>
+    00:00 <= time <= 90:00
+</p>
