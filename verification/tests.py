@@ -109,7 +109,7 @@ rc_7.add_time("+12m")''',
     "8. Third_2": [
         prepare_test(middle_code='''rc_8 = RemoteControl("microwave_3")
 rc_8.add_time("+10s")
-rc_8.add_time("+15m")
+rc_8.add_time("+15s")
 rc_8.add_time("+12m")''',
                      test="rc_8.show_time()",
                      answer="12:_5")
