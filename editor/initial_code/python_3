@@ -1,14 +1,16 @@
-class RemoteControlBase(object):
-    def __init__(self):
-        pass
+class MicrowaveBase(object):
+    pass
+
+class UniversalRemoteControl(object):
+    pass
 
 if __name__ == '__main__':
     #These "asserts" using only for self-checking and not necessary for auto-testing
 
-    remote_control_1 = RemoteControlM1()
+    remote_control_1 = RemoteControl("microwave_1")
     remote_control_1.set_time("01:00")
     
-    remote_control_2 = RemoteControlM5()
+    remote_control_2 = RemoteControl("microwave_5")
     remote_control_2.del_time("-300s")
     remote_control_2.add_time("+100s")
     
