@@ -59,7 +59,7 @@ rc_1.del_time("-2m")''',
     ],
     "2. Second": [
         prepare_test(middle_code='''rc_2 = RemoteControl("microwave_2")
-rc_2.add_time("89:00")
+rc_2.set_time("89:00")
 rc_2.add_time("+90s")
 rc_2.add_time("+20m")''',
                      test="rc_2.show_time()",
@@ -100,7 +100,7 @@ rc_6.add_time("+40s")''',
     ],
     "7. Second_2": [
         prepare_test(middle_code='''rc_7 = RemoteControlM2("microwave_2")
-rc_7.add_time("15:00")
+rc_7.set_time("15:00")
 rc_7.add_time("+90s")
 rc_7.add_time("+12m")''',
                      test="rc_7.show_time()",
