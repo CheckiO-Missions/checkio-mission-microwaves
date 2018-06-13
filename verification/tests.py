@@ -1,33 +1,53 @@
 init_code = """
+if not "MicrowaveBase" in USER_GLOBAL:
+    raise NotImplementedError("Where is 'MicrowaveBase'?")
+MicrowaveBase = USER_GLOBAL['MicrowaveBase']
+
 if not "Microwave1" in USER_GLOBAL:
     raise NotImplementedError("Where is 'Microwave1'?")
-
 Microwave1 = USER_GLOBAL['Microwave1']
 
 if not "Microwave2" in USER_GLOBAL:
     raise NotImplementedError("Where is 'Microwave2'?")
-
 Microwave2 = USER_GLOBAL['Microwave2']
 
 if not "Microwave3" in USER_GLOBAL:
     raise NotImplementedError("Where is 'Microwave3'?")
-
 Microwave3 = USER_GLOBAL['Microwave3']
 
 if not "Microwave4" in USER_GLOBAL:
     raise NotImplementedError("Where is 'Microwave4'?")
-
 Microwave4 = USER_GLOBAL['Microwave4']
 
 if not "Microwave5" in USER_GLOBAL:
     raise NotImplementedError("Where is 'Microwave5'?")
-
 Microwave5 = USER_GLOBAL['Microwave5']
+
+if not "UniversalRemoteControl" in USER_GLOBAL:
+    raise NotImplementedError("Where is 'UniversalRemoteControl'?")
+UniversalRemoteControl = USER_GLOBAL['UniversalRemoteControl']
 
 if not "RemoteControl" in USER_GLOBAL:
     raise NotImplementedError("Where is 'RemoteControl'?")
-
 RemoteControl = USER_GLOBAL['RemoteControl']
+
+if not issubclass(Microwave1, MicrowaveBase):
+    raise Warning('Microwave1 should be the subclass of MicrowaveBase')
+
+if not issubclass(Microwave2, MicrowaveBase):
+    raise Warning('Microwave2 should be the subclass of MicrowaveBase')
+
+if not issubclass(Microwave3, MicrowaveBase):
+    raise Warning('Microwave3 should be the subclass of MicrowaveBase')
+
+if not issubclass(Microwave4, MicrowaveBase):
+    raise Warning('Microwave4 should be the subclass of MicrowaveBase')
+
+if not issubclass(Microwave5, MicrowaveBase):
+    raise Warning('Microwave5 should be the subclass of MicrowaveBase')
+
+if not issubclass(RemoteControl, UniversalRemoteControl):
+    raise Warning('RemoteControl should be the subclass of UniversalRemoteControl')
 """
 
 run_test = """
@@ -50,84 +70,94 @@ def prepare_test(test="", answer=None, middle_code="", show_code=None):
 
 TESTS = {
     "1. First": [
-        prepare_test(middle_code='''rc_1 = RemoteControl("microwave_1")
+        prepare_test(middle_code='''microwave_1 = Microwave1()
+rc_1 = RemoteControl(microwave_1)
 rc_1.set_time("05:33")
-rc_1.del_time("-30s")
-rc_1.del_time("-2m")''',
+rc_1.del_time("30s")
+rc_1.del_time("2m")''',
                      test="rc_1.show_time()",
                      answer="_3:03")
     ],
     "2. Second": [
-        prepare_test(middle_code='''rc_2 = RemoteControl("microwave_2")
+        prepare_test(middle_code='''microwave_2 = Microwave2()
+rc_2 = RemoteControl(microwave_2)
 rc_2.set_time("89:00")
-rc_2.add_time("+90s")
-rc_2.add_time("+20m")''',
+rc_2.add_time("90s")
+rc_2.add_time("20m")''',
                      test="rc_2.show_time()",
                      answer="9_:00")
     ],
     "3. Third": [
-        prepare_test(middle_code='''rc_3 = RemoteControl("microwave_3")
-rc_3.del_time("-90s")
-rc_3.del_time("-6m")
-rc_3.add_time("+2m")''',
+        prepare_test(middle_code='''microwave_3 = Microwave3()
+rc_3 = RemoteControl(microwave_3)
+rc_3.del_time("90s")
+rc_3.del_time("6m")
+rc_3.add_time("2m")''',
                      test="rc_3.show_time()",
                      answer="02:_0")
     ],
     "4. Fourth": [
-        prepare_test(middle_code='''rc_4 = RemoteControl("microwave_4")
-rc_4.add_time("+60s")
-rc_4.add_time("+12m")
-rc_4.add_time("+2m")
+        prepare_test(middle_code='''microwave_4 = Microwave4()
+rc_4 = RemoteControl(microwave_4)
+rc_4.add_time("60s")
+rc_4.add_time("12m")
+rc_4.add_time("2m")
 rc_4.set_time("06:12")''',
                      test="rc_4.show_time()",
                      answer="06:1_")
     ],
     "5. Fifth": [
-        prepare_test(middle_code='''rc_5 = RemoteControl("microwave_5")
-rc_5.add_time("+90s")
-rc_5.add_time("+180s")
-rc_5.add_time("+2m")''',
+        prepare_test(middle_code='''microwave_5 = Microwave5()
+rc_5 = RemoteControl(microwave_5)
+rc_5.add_time("90s")
+rc_5.add_time("180s")
+rc_5.add_time("2m")''',
                      test="rc_5.show_time()",
                      answer="06:30")
     ],
     "6. First_2": [
-        prepare_test(middle_code='''rc_6 = RemoteControl("microwave_1")
+        prepare_test(middle_code='''microwave_1 = Microwave1()
+rc_6 = RemoteControl(microwave_1)
 rc_6.set_time("02:20")
-rc_6.del_time("-0s")
-rc_6.add_time("+40s")''',
+rc_6.del_time("0s")
+rc_6.add_time("40s")''',
                      test="rc_6.show_time()",
                      answer="_3:00")
     ],
     "7. Second_2": [
-        prepare_test(middle_code='''rc_7 = RemoteControlM2("microwave_2")
+        prepare_test(middle_code='''microwave_2 = Microwave2()
+rc_7 = RemoteControlM2(microwave_2)
 rc_7.set_time("15:00")
-rc_7.add_time("+90s")
-rc_7.add_time("+12m")''',
+rc_7.add_time("90s")
+rc_7.add_time("12m")''',
                      test="rc_7.show_time()",
                      answer="2_:30")
     ],
     "8. Third_2": [
-        prepare_test(middle_code='''rc_8 = RemoteControl("microwave_3")
-rc_8.add_time("+10s")
-rc_8.add_time("+15s")
-rc_8.add_time("+12m")''',
+        prepare_test(middle_code='''microwave_3 = Microwave3()
+rc_8 = RemoteControl(microwave_3)
+rc_8.add_time("10s")
+rc_8.add_time("15s")
+rc_8.add_time("12m")''',
                      test="rc_8.show_time()",
                      answer="12:_5")
     ],
     "9. Fourth_2": [
-        prepare_test(middle_code='''rc_9 = RemoteControl("microwave_4")
-rc_9.add_time("+0s")
-rc_9.add_time("+1m")
-rc_9.add_time("+2m")
+        prepare_test(middle_code='''microwave_4 = Microwave4()
+rc_9 = RemoteControl(microwave_4)
+rc_9.add_time("0s")
+rc_9.add_time("1m")
+rc_9.add_time("2m")
 rc_9.set_time("42:42")''',
                      test="rc_9.show_time()",
                      answer="42:4_")
     ],
     "10. Fifth_2": [
-        prepare_test(middle_code='''rc_10 = RemoteControl("microwave_5")
-rc_10.add_time("+10s")
-rc_10.add_time("+180s")
-rc_10.add_time("+6m")''',
+        prepare_test(middle_code='''microwave_5 = Microwave5()
+rc_10 = RemoteControl(microwave_5)
+rc_10.add_time("10s")
+rc_10.add_time("180s")
+rc_10.add_time("6m")''',
                      test="rc_10.show_time()",
                      answer="09:10")
     ]

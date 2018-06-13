@@ -1,18 +1,40 @@
 class MicrowaveBase(object):
     pass
 
+class Microwave1(MicrowaveBase):
+    pass
+
+class Microwave2(MicrowaveBase):
+    pass
+
+class Microwave3(MicrowaveBase):
+    pass
+
+class Microwave4(MicrowaveBase):
+    pass
+
+class Microwave5(MicrowaveBase):
+    pass
+
 class UniversalRemoteControl(object):
     pass
+
+class RemoteControl(UniversalRemoteControl):
+    pass
+
 
 if __name__ == '__main__':
     #These "asserts" using only for self-checking and not necessary for auto-testing
 
-    remote_control_1 = RemoteControl("microwave_1")
+    microwave_1 = Microwave1()
+    microwave_2 = Microwave5()
+
+    remote_control_1 = RemoteControl(microwave_1)
     remote_control_1.set_time("01:00")
     
-    remote_control_2 = RemoteControl("microwave_5")
-    remote_control_2.del_time("-300s")
-    remote_control_2.add_time("+100s")
+    remote_control_2 = RemoteControl(microwave_5)
+    remote_control_2.del_time("300s")
+    remote_control_2.add_time("100s")
     
     assert remote_control_1.show_time() == "_1:00"
     assert remote_control_2.show_time() == "01:40"

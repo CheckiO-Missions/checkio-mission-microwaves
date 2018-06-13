@@ -2,33 +2,43 @@
 У вас на работе есть место для обеда, где находятся 5 микроволновых печей (Мicrowave1, Мicrowave2, Мicrowave3, Мicrowave4, Мicrowave5), которые являются субклассами класса MicrowaveBase. Каждая печь может принимать команды от пульта дистанционного управления - RemoteControl, который является субклассом класса UniversalRemoteControl (универсальный пульт необходим для производства и других пультов - для телевизора, кондиционера и т.д.) Используемые команды:<br>
 <br>
 <strong>set_time</strong>("xx:xx"), где "xx:xx" - время в минутах и секундах, которое показывает, сколько будет разогреваться еда. Например: set_time("05:30")<br>
-<strong>add_time</strong>("+Ns"), <strong>add_time</strong>("+Nm"), где N - количество секунд или минут, которое нужно добавить к текущему времени.<br>
-<strong>del_time</strong>("-Ns"), <strong>del_time</strong>("-Nm"), где N - количество секунд или минут, которое нужно отнять от текущего времени.<br>
+<strong>add_time</strong>("Ns"), <strong>add_time</strong>("Nm"), где N - количество секунд или минут, которое нужно добавить к текущему времени.<br>
+<strong>del_time</strong>("Ns"), <strong>del_time</strong>("Nm"), где N - количество секунд или минут, которое нужно отнять от текущего времени.<br>
 <strong>show_time()</strong>, показывает текущее время выставленное на определенной печи.<br>
 <br>
 Время по умолчанию равно 00:00. Обратите внимание, что время не может быть меньше 00:00 и больше 90:00, даже если add_time или del_time приводят к подобной ситуации.
 <br>
 <br>
-Ваша задача - реализовать управление каждой микроволновкой с помощью общего пульта RemoteControl("name"), где name - название микроволновой печи, которой должен управлять пульт.
-Также обратите внимание, что только одна печь нормально отображает время - Microwave5. Все остальные печи имеют поврежденные дисплей и на месте определенного символа отображают лишь "_". Для первой печи такой символ - №1, для второй - №2 и т.д. Примеры:<br>
-RemoteControl('microwave_1').show_time() == "_0:00"<br>
-RemoteControl('microwave_2').show_time() == "0_:00"<br>
-RemoteControl('microwave_3').show_time() == "00:_0"<br>
-RemoteControl('microwave_4').show_time() == "00:0_"<br>
-RemoteControl('microwave_5').show_time() == "00:00"<br>
-<br>
+Ваша задача - создать все необходимые классы (родительский класс MicrowaveBase, 5 классов для печей, родительский класс UniversalRemoteControl и RemoteControl) и реализовать управление каждой микроволновкой с помощью общего пульта RemoteControl(microwave), где microwave - одна из 5 микроволновых печей, которой должен управлять пульт (например, microwave = Microwave1())
+Также обратите внимание, что только одна печь нормально отображает время - Microwave5. Все остальные печи имеют поврежденные дисплей и на месте определенного символа отображают лишь "_". Для первой печи такой символ - №1, для второй - №2 и т.д. Примеры:
+<pre class="brush: python">
+microwave_1 = Microwave1()
+microwave_2 = Microwave2()
+microwave_3 = Microwave3()
+microwave_4 = Microwave4()
+microwave_5 = Microwave5()
+
+RemoteControl(microwave_1).show_time() == "_0:00"
+RemoteControl(microwave_2).show_time() == "0_:00"
+RemoteControl(microwave_3).show_time() == "00:_0"
+RemoteControl(microwave_4).show_time() == "00:0_"
+RemoteControl(microwave_5).show_time() == "00:00"
+</pre>
 В этой миссии вам может помочь такой шаблон проектирования, как <a href='https://ru.wikipedia.org/wiki/%D0%9C%D0%BE%D1%81%D1%82_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)'>Bridge</a>. Основная задача шаблона - отделить абстракцию от её реализации так, чтобы то и другое можно было изменять независимо.
 </p>
 
 <p>
 <strong>Примеры</strong>:
 <pre class="brush: python">
-remote_control_1 = RemoteControl('microwave_1')
+microwave_1 = Microwave1()
+microwave_2 = Microwave5()
+
+remote_control_1 = RemoteControl(microwave_1)
 remote_control_1.set_time("01:00")
     
-remote_control_2 = RemoteControl('microwave_5')
-remote_control_2.del_time("-300s")
-remote_control_2.add_time("+100s")
+remote_control_2 = RemoteControl(microwave_5)
+remote_control_2.del_time("300s")
+remote_control_2.add_time("100s")
     
 remote_control_1.show_time() == "_1:00"
 remote_control_2.show_time() == "01:40"
