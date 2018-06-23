@@ -1,4 +1,4 @@
-class MicrowaveBase(object):
+class MicrowaveBase:
     pass
 
 class Microwave1(MicrowaveBase):
