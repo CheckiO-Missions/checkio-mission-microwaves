@@ -1,16 +1,16 @@
 <p>
-At your work there is a place for the lunch where are 3 microwave ovens (Мicrowave1, Мicrowave2, Мicrowave3) which are the subclasses of the MicrowaveBase class. Every microwave could be controlled by RemoteControl. RemoteControl is use the next commands:<br>
+There is a lunch place at your work with the 3 microwave ovens (Мicrowave1, Мicrowave2, Мicrowave3), which are the subclasses of the MicrowaveBase class. Every microwave can be controlled by a RemoteControl. The RemoteControl uses the next commands:<br>
 <br>
-<strong>set_time</strong>("xx:xx"), where "xx:xx" - time in the minutes and seconds, which shows, how long the eat will be warm up. For example: set_time("05:30")<br>
-<strong>add_time</strong>("Ns"), <strong>add_time</strong>("Nm"), where N - the amount of the seconds("s") or minutes("m"), which should be added to the current time.<br>
-<strong>del_time</strong>("Ns"), <strong>del_time</strong>("Nm"), where N - the amount of the seconds("s") or minutes("m"), which should be subtracted from the current time.<br>
-<strong>show_time()</strong>, shows current time for the microwave.<br>
+<strong>set_time</strong>("xx:xx"), where "xx:xx" - time in minutes and seconds, which shows how long the food will be warming up. For example: set_time("05:30");<br>
+<strong>add_time</strong>("Ns"), <strong>add_time</strong>("Nm"), where N - the number of seconds("s") or minutes("m"), which should be added to the current time;<br>
+<strong>del_time</strong>("Ns"), <strong>del_time</strong>("Nm"), where N - the amount of the seconds("s") or minutes("m"), which should be subtracted from the current time;<br>
+<strong>show_time()</strong> - shows the current time for the microwave.<br>
 <br>
-The default time is 00:00. The time is couldn't be less than 00:00 or greater than 90:00, even if add_time or del_time make this happens.
+The default time is 00:00. The time can't be less than 00:00 or greater than 90:00, even if add_time or del_time causes it.
 <br>
 <br>
-Your task is to create a few classes - one for the MicrowaveBase, three for the three different microwaves and one for the RemoteControl - just as described above. The RemoteControl will have 1 parameter - an instance of the Microwave (for example, RemoteControl(microwave_1), where microwave_1 = Microwave1()) which shows which Microwave should be controlled by the current RemoteControle.
-Only third oven is works properly and shows the full time. The other two have some problems with their displays - first shows '_' instead of the first digit and second do the same with the last digit. They are show time like this:
+Your task is to create a few classes - one for the MicrowaveBase, three for the three different microwaves, and one for the RemoteControl - just as described above. The RemoteControl will have 1 parameter - an instance of the Microwave (for example, RemoteControl(microwave_1), where microwave_1 = Microwave1()) that shows which Microwave should be controlled by the current RemoteControle.
+Only the third oven works properly and shows the full time. The other two have some flaws with their displays - the first shows '_' instead of the first digit and the second does the same with the last digit. They show time like this:
 <pre class="brush: python">
 microwave_1 = Microwave1()
 microwave_2 = Microwave2()
@@ -21,7 +21,7 @@ RemoteControl(microwave_2).show_time() == "00:0_"
 RemoteControl(microwave_3).show_time() == "00:00"
 </pre>
 <br>
-In this mission you could use <a href='https://en.wikipedia.org/wiki/Bridge_pattern'>Bridge</a> design pattern. Its main task is -  to decouple an abstraction from its implementation so that the two can vary independently.
+In this mission you could use the <a href='https://en.wikipedia.org/wiki/Bridge_pattern'>Bridge</a> design pattern. Its main task is -  to decouple an abstraction from its implementation so that the two can vary independently.
 </p>
 
 <p>
