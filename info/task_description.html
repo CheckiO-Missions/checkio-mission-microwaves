@@ -16,9 +16,9 @@ microwave_1 = Microwave1()
 microwave_2 = Microwave2()
 microwave_3 = Microwave3()
 
-RemoteControl(microwave_1).show_time() == "_0:00"
-RemoteControl(microwave_2).show_time() == "00:0_"
-RemoteControl(microwave_3).show_time() == "00:00"
+assert RemoteControl(microwave_1).show_time() == "_0:00"
+assert RemoteControl(microwave_2).show_time() == "00:0_"
+assert RemoteControl(microwave_3).show_time() == "00:00"
 </pre>
 <br>
 In this mission you could use the <a href='https://en.wikipedia.org/wiki/Bridge_pattern'>Bridge</a> design pattern. Its main task is -  to decouple an abstraction from its implementation so that the two can vary independently.
@@ -41,9 +41,9 @@ remote_control_3 = RemoteControl(microwave_3)
 remote_control_3.del_time("300s")
 remote_control_3.add_time("100s")
     
-remote_control_1.show_time() == "_1:00"
-remote_control_2.show_time() == "01:3_"
-remote_control_3.show_time() == "01:40"
+assert remote_control_1.show_time() == "_1:00"
+assert remote_control_2.show_time() == "01:3_"
+assert remote_control_3.show_time() == "01:40"
 </pre>
 </p>
 <br>
